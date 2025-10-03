@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: 'TodoNext',
   description: 'A Next.js port of the Modern Todo App',
   icons: {
-    icon: '/favicon.png',
+    icon: 'favicon.png',
   },
 };
 
@@ -29,8 +29,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <Header />
-          <main className="container mx-auto p-6">{children}</main>
-          <Footer />
+          <main className="mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl w-full py-6">{children}</main>
+          
         </Providers>
       </body>
     </html>

@@ -3,4 +3,6 @@ export interface Todo {
   id: number;
   title: string;
   completed: boolean;
+  // Optional long-form details for the todo
+  detail?: string;
 }

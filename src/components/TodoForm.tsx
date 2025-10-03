@@ -1,22 +1,23 @@
-"use client";
 import React, { useState } from 'react';
 import type { FormEvent } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 
 interface TodoFormProps {
-  onAddTodo: (title: string) => void;
+  onAddTodo: (title: string, detail?: string) => void;
   onClose: () => void;
   isPending: boolean;
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ onAddTodo, onClose, isPending }) => {
   const [title, setTitle] = useState('');
+  const [detail, setDetail] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      onAddTodo(title.trim());
+      onAddTodo(title.trim(), detail.trim());
       setTitle('');
+      setDetail('');
     }
   };
 
@@ -33,6 +34,14 @@ const TodoForm: React.FC<TodoFormProps> = ({ onAddTodo, onClose, isPending }) =>
             placeholder="e.g., Learn React Query"
             required
             autoFocus
+            disabled={isPending}
+          />
+          <textarea
+            value={detail}
+            onChange={(e) => setDetail(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm mt-3"
+            placeholder="Optional details for this todo"
+            rows={4}
             disabled={isPending}
           />
           <div className="flex justify-end space-x-3">

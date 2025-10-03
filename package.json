@@ -8,10 +8,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "@next-auth/supabase-adapter": "^0.2.1",
+    "@supabase/supabase-js": "^2.58.0",
     "@tanstack/react-query": "^5.90.2",
     "axios": "^1.12.2",
     "next": "15.5.4",
     "next-auth": "4.24.11",
+    "nodemailer": "^7.0.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-router-dom": "^7.9.3",

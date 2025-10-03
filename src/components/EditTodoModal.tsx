@@ -9,25 +9,27 @@ interface EditTodoModalProps {
   isOpen: boolean;
   onClose: () => void;
   todo: Todo;
-  onSave: (id: number, title: string, completed: boolean) => void;
+  onSave: (id: number, title: string, completed: boolean, detail?: string) => void;
   isPending: boolean;
 }
 
 const EditTodoModal: React.FC<EditTodoModalProps> = ({ isOpen, onClose, todo, onSave, isPending }) => {
   const [title, setTitle] = useState(todo.title);
   const [completed, setCompleted] = useState(todo.completed);
+  const [detail, setDetail] = useState(todo.detail || '');
 
   useEffect(() => {
     if (todo) {
       setTitle(todo.title);
       setCompleted(todo.completed);
+      setDetail(todo.detail || '');
     }
   }, [todo]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      onSave(todo.id, title, completed);
+      onSave(todo.id, title, completed, detail.trim());
     }
   };
 
@@ -61,6 +63,19 @@ const EditTodoModal: React.FC<EditTodoModalProps> = ({ isOpen, onClose, todo, on
           <label htmlFor="editTodoCompleted" className="text-sm font-medium text-gray-700">
             Completed
           </label>
+        </div>
+        <div>
+          <label htmlFor="editTodoDetail" className="block text-sm font-medium text-gray-700 mb-1">
+            Details
+          </label>
+          <textarea
+            id="editTodoDetail"
+            value={detail}
+            onChange={(e) => setDetail(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 shadow-sm"
+            rows={4}
+            disabled={isPending}
+          />
         </div>
         <div className="flex justify-end space-x-3">
           <button
